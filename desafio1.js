@@ -7,10 +7,11 @@ class ProductManager {
   }
 
   //Creamos el "molde" para añadir nuevos productos
-  addProduct = (title, description, price, stock = 5, code = 10) => {
+  addProduct = (title, description, thumbnail, price, stock = 5, code = 10) => {
     const product = {
       title,
       description,
+      thumbnail,
       price: price + price * this.#iva,
       stock,
       code,
@@ -61,14 +62,16 @@ const handleEvents = new ProductManager();
 handleEvents.addProduct(
   "Samsung Galaxy A32",
   "SmarthPhone de gama media",
+  "https://images.com/photos/SamsungA32.jpg",
   200000,
   30,
-  5
+  6
 ); // Crear un producto
 
 handleEvents.addProduct(
   "GigaByte Aorus AP750GM",
   "Fuente de alimentacion de 750w",
+  "https://images.com/photos/Gigabyte.jpg",
   80000,
   13,
   5
@@ -77,9 +80,10 @@ handleEvents.addProduct(
 handleEvents.addProduct(
   "Nvidia RTX 3060 12 Gb",
   "Placa de video",
+  "https://images.com/photos/RTX3060.jpg",
   380000,
-  13,
-  8
+  18,
+  5
 ); // Crear un producto
 
 console.log(handleEvents.getProducts()); // Mostrar todos los productos
