@@ -24,7 +24,13 @@ class ProductManager {
   };
 
   findProductById = (id) => {
-    return this.products.find((product) => product.id === id);
+    const productId = this.products.find((product) => product.id === id);
+
+    if (productId) {
+      console.log(`El producto con el ID: ${id} existe`);
+    } else {
+      console.error(`ID: ${id} not found`);
+    }
   };
 
   getProducts = () => {
@@ -34,13 +40,15 @@ class ProductManager {
 
 const handleEvents = new ProductManager();
 
+//! Uso de METODOS
+
 handleEvents.addProduct(
   "Samsung Galaxy A32",
   "SmarthPhone de gama media",
   200000,
   30,
   10
-);
+); // Crear un producto
 
 handleEvents.addProduct(
   "GigaByte Aorus AP750GM",
@@ -48,13 +56,8 @@ handleEvents.addProduct(
   80000,
   13,
   11
-);
+); // Crear un producto
 
 console.log(handleEvents.getProducts()); // Mostrar todos los productos
 
-const productById = handleEvents.findProductById(5); // Buscar producto por ID
-if (productById) {
-  console.log("Producto encontrado por ID:", productById);
-} else {
-  console.log("Producto no encontrado");
-}
+handleEvents.findProductById(0); // Buscar producto por ID
