@@ -14,11 +14,13 @@ class ProductManager {
       thumbnail,
       price: price + price * this.#iva,
       stock,
-      code,
+      code: "AA-PROD-" + code,
     };
 
     // Verifica si el código ya existe en algún producto
-    const codeExists = this.products.some((product) => product.code === code);
+    const codeExists = this.products.some(
+      (product) => product.code === "AA-PROD-" + code
+    );
 
     if (codeExists) {
       console.error(
@@ -79,7 +81,7 @@ handleEvents.addProduct(
 
 handleEvents.addProduct(
   "Nvidia RTX 3060 12 Gb",
-  "Placa de video",
+  "Placa de video de la familia NVIDIA",
   "https://images.com/photos/RTX3060.jpg",
   380000,
   18,
