@@ -6,16 +6,35 @@ class ProductManager {
     this.products = [];
   }
 
-  //Creamos el "molde" para añadir nuevos productos
+  // Creamos un metodo el cual formatea el precio (Añade punto y coma) por medio de REGEX (Expresiones regulares)
+
+  formatPrice = (price) => {
+    const parts = price.toFixed(2).split(".");
+    const formattedPrice = `$${parts[0].replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      "."
+    )},${parts[1]}`;
+    return formattedPrice;
+  };
+
+  //! Creamos el "molde" para añadir nuevos productos
   addProduct = (title, description, thumbnail, price, stock = 5, code = 10) => {
     const product = {
       title,
       description,
       thumbnail,
-      price: price + price * this.#iva,
+      price: this.formatPrice(price + price * this.#iva), // Formatear el precio aquí
       stock,
       code: "AA-PROD-" + code,
     };
+
+    // Verifica si los valores ingresados en stock / price sean siempre números
+    if (isNaN(price) || isNaN(stock)) {
+      console.error(
+        "El precio y el stock deben ser números válidos (No escribas letras!)."
+      );
+      return;
+    }
 
     // Verifica si el código ya existe en algún producto
     const codeExists = this.products.some(
