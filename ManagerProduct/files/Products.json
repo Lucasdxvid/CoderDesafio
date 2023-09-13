@@ -1,0 +1,37 @@
+[
+	{
+		"nombre": "Lucas",
+		"apellido": "Paz",
+		"edad": 23,
+		"curso": "Backend",
+		"id": 1
+	},
+	{
+		"nombre": "John",
+		"apellido": "Doe",
+		"edad": 21,
+		"curso": "Frontend",
+		"id": 2
+	},
+	{
+		"nombre": "Jessy",
+		"apellido": "Loe",
+		"edad": 24,
+		"curso": "FullStack",
+		"id": 3
+	},
+	{
+		"nombre": "Lucas",
+		"apellido": "Paz",
+		"edad": 20,
+		"curso": "Backend",
+		"id": 4
+	},
+	{
+		"nombre": "Lucas",
+		"apellido": "Paz",
+		"edad": 20,
+		"curso": "Backend",
+		"id": 5
+	}
+]
