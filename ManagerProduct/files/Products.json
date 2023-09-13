@@ -1,37 +1,20 @@
 [
 	{
-		"nombre": "Lucas",
-		"apellido": "Paz",
-		"edad": 23,
-		"curso": "Backend",
-		"id": 1
+		"id": 1,
+		"title": "Samsung Galaxy A32",
+		"description": "SmarthPhone de gama media",
+		"thumbnail": "https://images.com/photos/SamsungA32.jpg",
+		"price": "$7,26",
+		"stock": 200000,
+		"code": "AA-PROD-30"
 	},
 	{
-		"nombre": "John",
-		"apellido": "Doe",
-		"edad": 21,
-		"curso": "Frontend",
-		"id": 2
-	},
-	{
-		"nombre": "Jessy",
-		"apellido": "Loe",
-		"edad": 24,
-		"curso": "FullStack",
-		"id": 3
-	},
-	{
-		"nombre": "Lucas",
-		"apellido": "Paz",
-		"edad": 20,
-		"curso": "Backend",
-		"id": 4
-	},
-	{
-		"nombre": "Lucas",
-		"apellido": "Paz",
-		"edad": 20,
-		"curso": "Backend",
-		"id": 5
+		"id": 2,
+		"title": "Samsung Galaxy A32",
+		"description": "SmarthPhone de gama media",
+		"thumbnail": "https://images.com/photos/SamsungA32.jpg",
+		"price": "$242.000,00",
+		"stock": 30,
+		"code": "AA-PROD-6"
 	}
 ]

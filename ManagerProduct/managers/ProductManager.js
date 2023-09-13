@@ -1,57 +1,83 @@
-const fs = require("fs"); // Usamos el modulo fileSystem para hacer CRUD
+const fs = require("fs");
 
 class ProductManager {
-  // Nuestro constructor posee "path" x las rutas que pasaremos como parametro del directorio del archivo que crearemos
+  #iva = 0.21;
+
   constructor(path) {
     this.path = path;
   }
 
-  //! Obtenemos los usuarios del archivo Usuarios.json con este custom metodo
+  formatPrice = (price) => {
+    const parts = price.toFixed(2).split(".");
+    const formattedPrice = `$${parts[0].replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      "."
+    )},${parts[1]}`;
+    return formattedPrice;
+  };
+
   getProducts = async () => {
     try {
       if (fs.existsSync(this.path)) {
-        //en el caso que exista voy a leer su contenido
         const data = await fs.promises.readFile(this.path, "utf-8");
-        const products = JSON.parse(data); // Parseamos la info que recibimos de la data (lo pasamos de cadena de texto string a array)
-        return products; // Retornamos el array de usuarios
+        const products = JSON.parse(data);
+        return products;
       } else {
-        return []; // Si no existe retornamos un array vacio
+        return [];
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      return [];
     }
   };
 
-  //! Creamos usuarios y los pusheamos en nuestro Usuarios.json con este custom metodo
-  addProduct = async (product) => {
+  addProduct = async (title, description, thumbnail, price, stock, code) => {
     try {
-      //? Array de objetos traidos de Usuarios.json
-      const products = await this.getProducts(); // Obtenemos TODOS los usuarios que ya tenemos almacenado hasta el momento en Usuarios.json
+      const products = await this.getProducts();
 
-      //? ID AUTOINCREMENTABLE
-      if (products.length === 0) {
-        product.id = 1;
-      } else {
-        product.id = products[products.length - 1].id + 1; // [] sigfinica que accedemos al ultimo elemento
+      // Verifica si los valores ingresados en stock / price sean siempre números
+      if (isNaN(price) || isNaN(stock)) {
+        console.error(
+          "El precio y el stock deben ser números válidos (No escribas letras!)."
+        );
+        return;
       }
 
-      //insertamos el elemento o product
+      // Verifica si el código ya existe en algún producto
+      const codeExists = products.some(
+        (product) => product.code === "AA-PROD-" + code
+      );
+
+      if (codeExists) {
+        console.error(
+          `El código ${code} ya está en uso por otro producto (Intenta ingresar otro código).`
+        );
+        return; // El producto no se agrega al array si ya existe
+      }
+
+      const product = {
+        id: products.length === 0 ? 1 : products[products.length - 1].id + 1,
+        title,
+        description,
+        thumbnail,
+        price: this.formatPrice(price + price * this.#iva),
+        stock,
+        code: "AA-PROD-" + code,
+      };
+
       products.push(product);
 
-      //Una vez pusheado transformamos los mismos en una cadena de texto con "Stringify"
       await fs.promises.writeFile(
         this.path,
         JSON.stringify(products, null, "\t")
-      ); // El segundo parametro es NULL porque significa que no utilizamos ese parametro y el tercero es un tabulador o salto de linea
+      );
 
       return product;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 }
-
-//! Exportaciones similar a export default, etc.
 
 module.exports = {
   ProductManager,
