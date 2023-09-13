@@ -1,3 +1,3 @@
-# :bowtie: Coder-Desafío 1 :bowtie:
+# :bowtie: Coder-Desafío 2 :bowtie:
 
-Código del 1er desafío el cual consite en "Clases ECMAScript y ECMAScript avanzado"
+Repositorio con el código del desafío / entregable de CoderHouse
