@@ -4,17 +4,8 @@
 		"title": "Samsung Galaxy A32",
 		"description": "SmarthPhone de gama media",
 		"thumbnail": "https://images.com/photos/SamsungA32.jpg",
-		"price": "$7,26",
-		"stock": 200000,
-		"code": "AA-PROD-30"
-	},
-	{
-		"id": 2,
-		"title": "Samsung Galaxy A32",
-		"description": "SmarthPhone de gama media",
-		"thumbnail": "https://images.com/photos/SamsungA32.jpg",
 		"price": "$242.000,00",
 		"stock": 30,
-		"code": "AA-PROD-6"
+		"code": "AA-PROD-5"
 	}
 ]

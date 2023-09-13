@@ -9,7 +9,7 @@ const env = async () => {
     "https://images.com/photos/SamsungA32.jpg",
     200000,
     30,
-    6
+    5
   ); // Usamos el custom metodo addProduct para pushear el objeto a nuestro array
 
   const finalProducts = await manager.getProducts(); // EL metodo es asincrono por lo que usamos el wait
