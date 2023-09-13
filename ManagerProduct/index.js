@@ -1,19 +1,33 @@
-const { ProductManager } = require("./managers/ProductManager"); // Importamos con require para traer tambien las clases que utilizamos en el otro archivo js
+const { ProductManager } = require("./managers/ProductManager");
 
-const manager = new ProductManager("./files/Products.json"); // Creamos la instancia de la clase para acceder al los metodos de esa CLASS
+//! Creacion de nueva instancia de la clase
+const manager = new ProductManager("./files/Products.json");
 
-const env = async () => {
+const handleMethods = async () => {
+  //! Agregar productos (Campos: Nombre - Descripcion - Imagen URL - Precio - Stock - Codigo)
+
   await manager.addProduct(
-    "Samsung Galaxy A32",
-    "SmarthPhone de gama media",
-    "https://images.com/photos/SamsungA32.jpg",
-    200000,
-    30,
-    5
-  ); // Usamos el custom metodo addProduct para pushear el objeto a nuestro array
+    "GigaByte Aorus AP750GM", // Nombre o Titulo del producto
+    "Fuente de alimentacion de 750w", // Descripcion
+    "https://images.com/photos/Gigabyte.jpg", // Imagen URL
+    80000, // Precio
+    13, // Stock
+    4 // Codigo
+  );
 
-  const finalProducts = await manager.getProducts(); // EL metodo es asincrono por lo que usamos el wait
-  console.log(finalProducts);
+  //! Buscar producto por ID (Colocar ID a buscar en "productIdToFind")
+
+  const productIdToFind = 1;
+
+  const productFound = await manager.getProductById(productIdToFind);
+
+  if (productFound) {
+    console.log("Producto encontrado:", productFound);
+  }
+
+  //! Consologeo de todos los Productos existentes
+
+  console.log("Lista de productos:", await manager.getProducts());
 };
 
-env();
+handleMethods(); // Llamada de la funcion encargada de manejar los custom metodos de nuestra clase "ProductManager"

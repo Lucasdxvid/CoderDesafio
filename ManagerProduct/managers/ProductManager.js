@@ -1,11 +1,18 @@
+//! Obtencion del modulo FileSystem
+
 const fs = require("fs");
 
+//! Clase ProductManager encargada de crear / verificar existencias de productos
+
 class ProductManager {
+  //Definimos el IVA a partir de una variable privada
   #iva = 0.21;
 
   constructor(path) {
     this.path = path;
   }
+
+  // Creamos un metodo el cual formatea el precio (Añade punto y coma) por medio de REGEX (Expresiones regulares)
 
   formatPrice = (price) => {
     const parts = price.toFixed(2).split(".");
@@ -16,6 +23,8 @@ class ProductManager {
     return formattedPrice;
   };
 
+  //! Obtencion y Parseo de productos ya existentes
+
   getProducts = async () => {
     try {
       if (fs.existsSync(this.path)) {
@@ -23,19 +32,20 @@ class ProductManager {
         const products = JSON.parse(data);
         return products;
       } else {
-        return [];
+        return []; // Si no existe retornamos un array vacio
       }
     } catch (error) {
       console.error(error);
-      return [];
     }
   };
 
+  //! "Molde" para añadir/crear nuevos productos
+
   addProduct = async (title, description, thumbnail, price, stock, code) => {
     try {
-      const products = await this.getProducts();
+      const products = await this.getProducts(); // Obtencion de productos ya existentes del JSON (Parseado)
 
-      // Verifica si los valores ingresados en stock / price sean siempre números
+      // Verifica que los valores ingresados en stock / price sean siempre números
       if (isNaN(price) || isNaN(stock)) {
         console.error(
           "El precio y el stock deben ser números válidos (No escribas letras!)."
@@ -43,7 +53,7 @@ class ProductManager {
         return;
       }
 
-      // Verifica si el código ya existe en algún producto
+      // Verifica que si el "CODE" ya existe en X producto
       const codeExists = products.some(
         (product) => product.code === "AA-PROD-" + code
       );
@@ -60,12 +70,14 @@ class ProductManager {
         title,
         description,
         thumbnail,
-        price: this.formatPrice(price + price * this.#iva),
+        price: this.formatPrice(price + price * this.#iva), // Precio ya formateado
         stock,
         code: "AA-PROD-" + code,
       };
 
-      products.push(product);
+      products.push(product); // Pusheamos el nuevo producto al array
+
+      //! Transformacion de array a cadena de texto (STRING)
 
       await fs.promises.writeFile(
         this.path,
@@ -77,7 +89,29 @@ class ProductManager {
       console.error(error);
     }
   };
+
+  //! Metodo encargado de buscar productos acorde a su ID
+
+  getProductById = async (id) => {
+    try {
+      const products = await this.getProducts();
+      const product = products.find((p) => p.id === id);
+
+      if (!product) {
+        console.log(`Producto con ID ${id} no encontrado.`);
+        return null;
+      } else {
+        console.log(`Producto con ID ${id} fue encontrado con exito.`);
+        return product;
+      }
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
 }
+
+//! Exportacion del modulo a usar
 
 module.exports = {
   ProductManager,

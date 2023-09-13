@@ -7,5 +7,14 @@
 		"price": "$242.000,00",
 		"stock": 30,
 		"code": "AA-PROD-5"
+	},
+	{
+		"id": 2,
+		"title": "GigaByte Aorus AP750GM",
+		"description": "Fuente de alimentacion de 750w",
+		"thumbnail": "https://images.com/photos/Gigabyte.jpg",
+		"price": "$96.800,00",
+		"stock": 13,
+		"code": "AA-PROD-4"
 	}
 ]
