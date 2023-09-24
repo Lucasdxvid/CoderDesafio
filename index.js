@@ -1,3 +1,4 @@
+import { Express } from "express";
 const { ProductManager } = require("./managers/ProductManager");
 
 //! Creacion de nueva instancia de la clase
