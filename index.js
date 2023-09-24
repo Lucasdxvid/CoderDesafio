@@ -1,4 +1,4 @@
-//import { Express } from "express";
+import express from "express"
 import ProductManager from "./managers/ProductManager.js"; //? Añadir el .JS porque sino no funciona
 
 //! Creacion de nueva instancia de la clase
