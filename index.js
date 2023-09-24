@@ -29,9 +29,17 @@ app.get("/products", async (req, res) => {
 
 app.get("/products/:pid", async (req, res) => {
   // Transformamos el path param de nuestro req param en numero
-  const userId = Number(req.params.pid);
+  const productId = Number(req.params.pid);
 
-  res.send(await manager.getProductById(userId));
+  // Obtenemos el producto por su ID
+  const product = await manager.getProductById(productId);
+
+  // Verificamos si el producto existe y si no existe devolvemos un 404
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send(`El producto ID: ${productId} no existe`);
+  }
 });
 
 //! Puerto a escuchar para levantar el servidor
