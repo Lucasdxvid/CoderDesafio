@@ -1,5 +1,8 @@
-import express from "express"
+import express from "express";
 import ProductManager from "./managers/ProductManager.js"; //? Añadir el .JS porque sino no funciona
+
+//! Creacion de servidor HTTP con "Express"
+const app = express();
 
 //! Creacion de nueva instancia de la clase
 const manager = new ProductManager("./files/Products.json");
