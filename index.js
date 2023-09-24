@@ -1,5 +1,5 @@
-import { Express } from "express";
-const { ProductManager } = require("./managers/ProductManager");
+//import { Express } from "express";
+import ProductManager from "./managers/ProductManager.js"; //? Añadir el .JS porque sino no funciona
 
 //! Creacion de nueva instancia de la clase
 const manager = new ProductManager("./files/Products.json");

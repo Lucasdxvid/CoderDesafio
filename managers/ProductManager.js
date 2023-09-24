@@ -1,10 +1,10 @@
 //! Obtencion del modulo FileSystem
 
-const fs = require("fs");
+import fs from "fs";
 
 //! Clase ProductManager encargada de crear / verificar existencias de productos
 
-class ProductManager {
+export default class ProductManager {
   //Definimos el IVA a partir de una variable privada
   #iva = 0.21;
 
@@ -110,9 +110,3 @@ class ProductManager {
     }
   };
 }
-
-//! Exportacion del modulo a usar
-
-module.exports = {
-  ProductManager,
-};
