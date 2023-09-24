@@ -7,31 +7,33 @@ const app = express();
 //! Creacion de nueva instancia de la clase
 const manager = new ProductManager("./files/Products.json");
 
-const handleMethods = async () => {
-  //! Agregar productos (Campos: Nombre - Descripcion - Imagen URL - Precio - Stock - Codigo)
+//! Soporte de datos
 
-  await manager.addProduct(
-    "GigaByte Aorus AP750GM", // Nombre o Titulo del producto
-    "Fuente de alimentacion de 750w", // Descripcion
-    "https://images.com/photos/Gigabyte.jpg", // Imagen URL
-    80000, // Precio
-    13, // Stock
-    4 // Codigo
-  );
+app.use(express.urlencoded({ extended: true }));
 
-  //! Buscar producto por ID (Colocar ID a buscar en "productIdToFind")
+//! Obtencion de productos (Limitar productos con limit="numero")
+app.get("/products", async (req, res) => {
+  // Definimos el valor limit y lo parseamos ya que solo recibe STRINGS
+  const limit = parseInt(req.query.limit);
 
-  const productIdToFind = 1;
+  // Obtenemos todos los productos
+  const allProducts = await manager.getProducts();
 
-  const productFound = await manager.getProductById(productIdToFind);
+  // Aplicamos un limite de productos a mostrar y en caso contrario mostramos todos
+  const products = limit ? allProducts.slice(0, limit) : allProducts;
 
-  if (productFound) {
-    console.log("Producto encontrado:", productFound);
-  }
+  res.send(products);
+});
 
-  //! Consologeo de todos los Productos existentes
+//! Buscar producto por ID en un path param
 
-  console.log("Lista de productos:", await manager.getProducts());
-};
+app.get("/products/:pid", async (req, res) => {
+  // Transformamos el path param de nuestro req param en numero
+  const userId = Number(req.params.pid);
 
-handleMethods(); // Llamada de la funcion encargada de manejar los custom metodos de nuestra clase "ProductManager"
+  res.send(await manager.getProductById(userId));
+});
+
+//! Puerto a escuchar para levantar el servidor
+
+app.listen(8080, () => console.log("Listening on 8080"));
