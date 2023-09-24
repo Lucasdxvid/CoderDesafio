@@ -1,0 +1,25 @@
+{
+  "name": "c2---ecmascritpt-basico-y-avanzado",
+  "version": "1.0.0",
+  "description": "Repositorio con el código del desafío / entregable de CoderHouse",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucasdxvid/clase-0---introduccion.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lucasdxvid/clase-0---introduccion/issues"
+  },
+  "homepage": "https://github.com/Lucasdxvid/clase-0---introduccion#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
