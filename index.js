@@ -45,3 +45,34 @@ app.get("/products/:pid", async (req, res) => {
 //! Puerto a escuchar para levantar el servidor
 
 app.listen(8080, () => console.log("Listening on 8080"));
+
+//TODO: Añadir productos
+
+const handleMethods = async () => {
+  //! Agregar productos (Campos: Nombre - Descripcion - Imagen URL - Precio - Stock - Codigo)
+
+  await manager.addProduct(
+    "Nvidia MSI Ventus GeForce RTX 3070 VENTUS 2X OC Edition 8GB", // Nombre o Titulo del producto
+    "Placa de video de la familia Nvidia", // Descripcion
+    "https://images.com/photos/Nvidia4080.jpg", // Imagen URL
+    440000, // Precio
+    5, // Stock
+    14 // Codigo
+  );
+
+  //! Buscar producto por ID (Colocar ID a buscar en "productIdToFind")
+
+  const productIdToFind = 1;
+
+  const productFound = await manager.getProductById(productIdToFind);
+
+  if (productFound) {
+    console.log("Producto encontrado:", productFound);
+  }
+
+  //! Consologeo de todos los Productos existentes
+
+  console.log("Lista de productos:", await manager.getProducts());
+};
+
+handleMethods(); // Llamada de la funcion encargada de manejar los custom metodos de nuestra clase "ProductManager"
